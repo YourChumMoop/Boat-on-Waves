@@ -30,7 +30,7 @@ func get_height(world_position: Vector3) -> float:
 	var pixel_pos = Vector2(uv_x * noise.get_width(), uv_y * noise.get_height())
 	base_noise = noise.get_pixelv(pixel_pos).r;
 	# base_noise + smallWave Stuff
-	base_noise += cos(world_position.z * 3.14 + time * 2.0) * smallWaveAmp
+	base_noise += cos(world_position.z * 1.14 - time * 2.0) * smallWaveAmp
 	# base_noise + bigWave Stuff
-	base_noise += cos(world_position.z + time * 0.5) * bigWaveAmp
+	base_noise += cos(world_position.z * 0.2 + time * 0.5) * bigWaveAmp
 	return global_position.y + base_noise * height_scale;

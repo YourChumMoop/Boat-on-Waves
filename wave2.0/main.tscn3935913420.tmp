@@ -1,0 +1,188 @@
+[gd_scene load_steps=15 format=3 uid="uid://cnrjx8qi2tc7c"]
+
+[ext_resource type="Shader" uid="uid://b12ypfgr3c0j" path="res://water_shader.gdshader" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://b8m2xfrgycds1" path="res://water.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://tyb4yqnp8i24" path="res://test_capsule.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://bqyrs10a7yq4c" path="res://marker_3d.gd" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://bhber0bosnvfs" path="res://boat.gd" id="5_7mycd"]
+[ext_resource type="ArrayMesh" uid="uid://b0u8k1dxhktiy" path="res://BoatTest.obj" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://cbesuussugmkp" path="res://camera_3d_2.gd" id="7_272bh"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0xm2m"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h2yge"]
+seamless = true
+noise = SubResource("FastNoiseLite_0xm2m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bvp3"]
+render_priority = 0
+shader = ExtResource("1_ig7tw")
+shader_parameter/noise = SubResource("NoiseTexture2D_h2yge")
+shader_parameter/height_scale = 1.335
+shader_parameter/wave_time = 0.0
+shader_parameter/noise_scale = 27.39
+shader_parameter/smallWaveAmp = 0.345
+shader_parameter/bigWaveAmp = 0.92
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lquwl"]
+material = SubResource("ShaderMaterial_1bvp3")
+size = Vector2(100, 100)
+subdivide_width = 512
+subdivide_depth = 512
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ig7tw"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0xm2m"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7mycd"]
+size = Vector3(0.654053, 0.14151, 1.2146)
+
+[node name="MAIN" type="Node"]
+
+[node name="Water" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_lquwl")
+script = ExtResource("2_0xm2m")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 0.914445, 0.404711, 0, -0.404711, 0.914445, 0, 2.26248, 5.96446)
+light_energy = 16.0
+light_size = 0.16
+spot_range = 11.983
+spot_angle = 18.4015
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.044748, -0.830433, 0.555319, -0.0780124, 0.557083, 0.826785, -0.995948, -0.00632484, -0.0897124, 4.92208, 6.00007, -0.750828)
+fov = 61.875
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.84695, 2.35329, 0)
+script = ExtResource("4_1bvp3")
+
+[node name="capsules" type="Node3D" parent="."]
+visible = false
+
+[node name="TestCapsule" type="RigidBody3D" parent="capsules"]
+transform = Transform3D(1, 0, 0, 0, 0.842424, 0.538815, 0, -0.538815, 0.842424, 1.33513, 1.82768, 0.37417)
+script = ExtResource("3_h2yge")
+float_force = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="capsules/TestCapsule"]
+transform = Transform3D(0.432871, 0, 0, 0, 0.432871, -2.98023e-08, 0, 2.98023e-08, 0.432871, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_ig7tw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="capsules/TestCapsule"]
+transform = Transform3D(0.432871, 0, 0, 0, 0.432871, -2.98023e-08, 0, 2.98023e-08, 0.432871, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_0xm2m")
+
+[node name="TestCapsule2" type="RigidBody3D" parent="capsules"]
+transform = Transform3D(1, 0, 0, 0, 0.842424, 0.538815, 0, -0.538815, 0.842424, 3.59731, 2.95554, 3.57526)
+script = ExtResource("3_h2yge")
+float_force = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="capsules/TestCapsule2"]
+transform = Transform3D(0.432871, 0, 0, 0, 0.432871, -2.98023e-08, 0, 2.98023e-08, 0.432871, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_ig7tw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="capsules/TestCapsule2"]
+transform = Transform3D(0.432871, 0, 0, 0, 0.432871, -2.98023e-08, 0, 2.98023e-08, 0.432871, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_0xm2m")
+
+[node name="TestCapsule3" type="RigidBody3D" parent="capsules"]
+transform = Transform3D(1, 0, 0, 0, 0.842424, 0.538815, 0, -0.538815, 0.842424, 3.59731, 2.95554, 1.87816)
+script = ExtResource("3_h2yge")
+float_force = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="capsules/TestCapsule3"]
+transform = Transform3D(0.432871, 0, 0, 0, 0.432871, -2.98023e-08, 0, 2.98023e-08, 0.432871, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_ig7tw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="capsules/TestCapsule3"]
+transform = Transform3D(0.432871, 0, 0, 0, 0.432871, -2.98023e-08, 0, 2.98023e-08, 0.432871, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_0xm2m")
+
+[node name="TestCapsule4" type="RigidBody3D" parent="capsules"]
+transform = Transform3D(1, 0, 0, 0, 0.842424, 0.538815, 0, -0.538815, 0.842424, 3.59731, 2.95554, -0.0944741)
+script = ExtResource("3_h2yge")
+float_force = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="capsules/TestCapsule4"]
+transform = Transform3D(0.432871, 0, 0, 0, 0.432871, -2.98023e-08, 0, 2.98023e-08, 0.432871, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_ig7tw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="capsules/TestCapsule4"]
+transform = Transform3D(0.432871, 0, 0, 0, 0.432871, -2.98023e-08, 0, 2.98023e-08, 0.432871, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_0xm2m")
+
+[node name="TestCapsule5" type="RigidBody3D" parent="capsules"]
+transform = Transform3D(1, 0, 0, 0, 0.842424, 0.538815, 0, -0.538815, 0.842424, 3.59731, 2.95554, -2.2325)
+script = ExtResource("3_h2yge")
+float_force = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="capsules/TestCapsule5"]
+transform = Transform3D(0.432871, 0, 0, 0, 0.432871, -2.98023e-08, 0, 2.98023e-08, 0.432871, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_ig7tw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="capsules/TestCapsule5"]
+transform = Transform3D(0.432871, 0, 0, 0, 0.432871, -2.98023e-08, 0, 2.98023e-08, 0.432871, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_0xm2m")
+
+[node name="Boat" type="RigidBody3D" parent="."]
+transform = Transform3D(0.999999, -0.00139626, 0, 0.00139626, 0.999999, 0, 0, 0, 1, 0, 2.27781, 0)
+mass = 5.0
+script = ExtResource("5_7mycd")
+float_force = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boat"]
+transform = Transform3D(-0.3, 0, -2.62268e-08, 0, 0.3, 0, 2.62268e-08, 0, -0.3, 0, 0, 0)
+mesh = ExtResource("5_lquwl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boat"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.292)
+shape = SubResource("BoxShape3D_7mycd")
+
+[node name="ProbeContainer" type="Node3D" parent="Boat"]
+
+[node name="Probe01" type="Marker3D" parent="Boat/ProbeContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.301673, -0.0681298, -0.309817)
+
+[node name="Probe02" type="Marker3D" parent="Boat/ProbeContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00188473, -0.0681298, -0.309817)
+
+[node name="Probe03" type="Marker3D" parent="Boat/ProbeContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.322479, -0.0681298, -0.309817)
+
+[node name="Probe04" type="Marker3D" parent="Boat/ProbeContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.301673, -0.0681298, 0.289277)
+
+[node name="Probe05" type="Marker3D" parent="Boat/ProbeContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00188473, -0.0681298, 0.289277)
+
+[node name="Probe06" type="Marker3D" parent="Boat/ProbeContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.322479, -0.0681298, 0.289277)
+
+[node name="Probe07" type="Marker3D" parent="Boat/ProbeContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.301673, -0.0681298, 0.89254)
+
+[node name="Probe08" type="Marker3D" parent="Boat/ProbeContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00188473, -0.0681298, 0.89254)
+
+[node name="Probe09" type="Marker3D" parent="Boat/ProbeContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.322479, -0.0681298, 0.89254)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Boat"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.000646842, 0.463268, 0.683771)
+light_energy = 5.444
+light_indirect_energy = 2.555
+light_size = 0.22
+light_specular = 0.53
+spot_range = 4.74168
+spot_angle = 55.4104
+
+[node name="Camera3D2" type="Camera3D" parent="." node_paths=PackedStringArray("target_node")]
+transform = Transform3D(-1, 4.12363e-11, 8.74482e-08, 4.59841e-08, 0.850829, 0.525442, -7.43819e-08, 0.525442, -0.850829, -0.575806, 6.20585, -8.78403)
+current = true
+fov = 62.9956
+script = ExtResource("7_272bh")
+target_node = NodePath("../Boat")

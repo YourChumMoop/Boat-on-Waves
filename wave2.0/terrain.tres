@@ -1,0 +1,5 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ctjymaw40bm70"]
+
+[resource]
+emission_energy_multiplier = 16.0
+emission_operator = 1

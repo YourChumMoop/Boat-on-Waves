@@ -40,7 +40,7 @@ func _physics_process(delta):
 	else:
 		current_speed = move_toward(current_speed, 0.0, deacceleration * delta)
 	
-	var direction: = global_transform.basis.z.normalized()
+	var direction: = -global_transform.basis.z.normalized()
 	var movement:Vector3 = direction * current_speed * delta
 	apply_central_force(direction * current_speed)
 	
