@@ -1,0 +1,10 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1753546357
+boat.gd::GDScript::-1::1753546223::0::1::::<>RigidBody3D<>::
+BoatTest.obj::Mesh::4184452219721749844::1753546223::1753546363::1::::<><>::
+icon.svg::CompressedTexture2D::8857446135913025177::1753546223::1753546363::1::::<><>::
+main.tscn::PackedScene::5720980041082090130::1753546223::0::1::::<><>::uid://b12ypfgr3c0j::::res://water_shader.gdshader<>uid://b8m2xfrgycds1::::res://water.gd<>uid://tyb4yqnp8i24::::res://test_capsule.gd<>uid://bqyrs10a7yq4c::::res://marker_3d.gd<>uid://bhber0bosnvfs::::res://boat.gd<>uid://b0u8k1dxhktiy::::res://BoatTest.obj
+marker_3d.gd::GDScript::-1::1753546223::0::1::::<>Marker3D<>::
+test_capsule.gd::GDScript::-1::1753546223::0::1::::<>RigidBody3D<>::
+water.gd::GDScript::-1::1753546223::0::1::::<>MeshInstance3D<>::
+water_shader.gdshader::Shader::-1::1753546223::0::1::::<><>::
