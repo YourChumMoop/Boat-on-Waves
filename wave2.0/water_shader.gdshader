@@ -15,10 +15,11 @@ void vertex() {
   //float height = texture(noise, VERTEX.xz / 10.0 + 0.5).x;
   vec2 pos = VERTEX.xz;
   float k = height(pos, wave_time);
+  float preK = height(pos, wave_time);
   //k += smallWave Stuff
-  k += cos(VERTEX.z * 3.14 + wave_time * 2.0) * smallWaveAmp;
+  k += cos(VERTEX.z * (1.14) - (wave_time) * (2.0)) * (smallWaveAmp);
   //k += bigWave Stuff
-  k += cos(VERTEX.z + wave_time * 0.5) * bigWaveAmp;
+  k += cos(VERTEX.z * (0.2) + wave_time * 0.5) * bigWaveAmp;
   VERTEX.y += k;
   NORMAL = normalize(vec3(k - height(pos + vec2(0.1, 0.0), wave_time), 0.1, k - height(pos + vec2(0.0, 0.1), wave_time)));
 }
